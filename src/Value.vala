@@ -8,7 +8,7 @@ namespace United {
 
         public Value(double measure, string measure_unit) {
             quantity = measure;
-            parse_measure_unit(measure_unit, out prefix, out unit, out prefix_unit);
+            parse_measure_unit(measure_unit);
         }
 
         public Value.from_string(string value) {
@@ -22,7 +22,7 @@ namespace United {
                         this.quantity = double.parse(quantity.replace(",", "."));
                     }
                     if (measure_unit != null) {
-                        parse_measure_unit(measure_unit, out prefix, out unit, out prefix_unit);
+                        parse_measure_unit(measure_unit);
                     }
                 }
             } catch (RegexError e) {
@@ -52,17 +52,6 @@ namespace United {
             return format.printf(quantity).replace(",", ".") + separator + prefix_unit;
         }
 
-        public void parse_measure_unit(string measure_unit, out Prefix prefix, out string unit, out string prefix_unit) {
-            unit = measure_unit;
-            prefix = Prefix.NONE;
-            if (measure_unit.length > 1) {
-                unit = measure_unit.substring(measure_unit.length - 1, 1);
-                prefix = Prefix.from_string(measure_unit.substring(0, 1));
-            }
-
-            prefix_unit = prefix.to_string() + unit; 
-        }
-
         public Value human(uint8 decimal_precision = 2) {
             var factor = num_of_digits((int) quantity) / 3;
             if (factor >= 1) {
@@ -83,7 +72,19 @@ namespace United {
                 unit,
                 prefix
             );
-        }        
+        }
+
+        private void parse_measure_unit(string measure_unit) {
+            unit = measure_unit;
+            prefix = Prefix.NONE;
+            if (measure_unit.length > 1) {
+                unit = measure_unit.substring(measure_unit.length - 1, 1);
+                prefix = Prefix.from_string(measure_unit.substring(0, 1));
+            }
+
+            prefix_unit = prefix.to_string() + unit; 
+        }
+
     }
 
     private int num_of_digits(int value) {

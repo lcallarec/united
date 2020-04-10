@@ -92,14 +92,67 @@ private void register_value_test() {
     Test.add_func("/United/Value/from_string#to_string_with_space_between_quantity_and_prefix_unit", () => {
 
         // Given
-        var value = "12.5cl";
+        var value = "12.5pl";
         // When
         var object = United.Value.from_string(value);
 
         // Then
         assert(object.quantity == 12.5);
         assert(object.unit == "l");      
-        assert(object.prefix == United.Prefix.CENTI);
-        assert(object.to_string(" ") == "12.5 cl");
+        assert(object.prefix == United.Prefix.PICO);
+        assert(object.to_string(" ") == "12.5 pl");
+    });
+
+    Test.add_func("/United/Value/human_big_value", () => {
+
+        // Given
+        var value = "5050000000ng"; //nanogram
+        var object = United.Value.from_string(value);
+
+        // When
+        var human = object.human().to_string();
+
+        // Then
+        assert(human == "5.05g");
+    });
+
+
+    Test.add_func("/United/Value/human_thousands_value", () => {
+
+        // Given
+        var value = "5050g";
+        var object = United.Value.from_string(value);
+        
+        // When
+        var human = object.human().to_string();
+        
+        // Then
+        assert(human == "5.05kg");
+    });
+
+    Test.add_func("/United/Value/human_ten_thousands_value", () => {
+
+        // Given
+        var value = "50787g";
+        var object = United.Value.from_string(value);
+        
+        // When
+        var human = object.human().to_string();
+
+        // Then
+        assert(human == "50.79kg");
+    });
+
+    Test.add_func("/United/Value/human_decimal_precision", () => {
+
+        // Given
+        var value = "79851237PJ";
+        var object = United.Value.from_string(value);
+        
+        // When
+        var human = object.human(3).to_string(" ");
+
+        // Then
+        assert(human == "79.851 ZJ");
     });    
 }

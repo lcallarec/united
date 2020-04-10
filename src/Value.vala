@@ -33,6 +33,13 @@ namespace United {
             }
         }
 
+        public Value.from_attributes(double quantity, string unit, Prefix prefix) {
+            this.quantity = quantity;
+            this.unit = unit;
+            this.prefix = prefix;
+            prefix_unit = prefix.to_string() + unit;
+        }
+
         public string to_string(string? separator = null, uint8? precision = null) {
             var format = "%g";
             if (precision != null) {
@@ -55,5 +62,37 @@ namespace United {
 
             prefix_unit = prefix.to_string() + unit; 
         }
+
+        public Value human(uint8 decimal_precision = 2) {
+            var factor = num_of_digits((int) quantity) / 3;
+            if (factor >= 1) {
+                var k = decimal_precision == 0 ? 1 : Math.pow(10, (double) decimal_precision);
+                return Value.from_attributes(
+                    ((double) Math.round(quantity / Math.pow(10, factor  * 3) * k) / k),
+                    unit,
+                    prefix - factor
+                );
+            }
+
+            return this.clone();
+        }
+
+        public Value clone() {
+            return Value.from_attributes(
+                quantity,
+                unit,
+                prefix
+            );
+        }        
+    }
+
+    private int num_of_digits(int value) {
+        var num_digits = 0;
+        while (value != 0) {
+            value /= 10;
+            ++num_digits;
+        }
+
+        return num_digits;
     }
 }

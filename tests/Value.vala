@@ -31,7 +31,7 @@ private void register_value_test() {
         assert(object.prefix == United.Prefix.KILO);
         assert(object.to_string() == "77.28kg");
     });
-
+    
     Test.add_func("/United/Value/from_string#integer_value", () => {
 
         // Given
@@ -46,6 +46,33 @@ private void register_value_test() {
         assert(object.to_string() == "415Mb");
     });
 
+    Test.add_func("/United/Value/from_string#with_one_space", () => {
+
+        // Given
+        var value = "415 Mb";
+        // When
+        var object = United.Value.from_string(value);
+
+        // Then
+        assert(object.quantity == 415);
+        assert(object.unit == "b");      
+        assert(object.prefix == United.Prefix.MEGA);
+        assert(object.to_string() == "415Mb");
+    });
+
+    Test.add_func("/United/Value/from_string#with_many_spaces", () => {
+
+        // Given
+        var value = "415    Mb";
+        // When
+        var object = United.Value.from_string(value);
+
+        // Then
+        assert(object.quantity == 415);
+        assert(object.unit == "b");      
+        assert(object.prefix == United.Prefix.MEGA);
+        assert(object.to_string() == "415Mb");
+    });
 
     Test.add_func("/United/Value/from_string#float_value_with_comma", () => {
 

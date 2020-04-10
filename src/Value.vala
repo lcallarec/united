@@ -13,7 +13,7 @@ namespace United {
 
         public Value.from_string(string value) {
             try {
-                Regex regex = new Regex ("^([0-9.,]+)(\\w+)$");
+                Regex regex = new Regex ("^([0-9.,]+)[\\s]{0,}(\\w+)$");
                 MatchInfo info;
                 if (regex.match(value, 0, out info)){
                     var quantity = info.fetch(1);

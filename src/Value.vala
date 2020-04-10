@@ -53,23 +53,21 @@ namespace United {
         }
 
         public Value to_human(uint8 decimal_precision = 2) {
-            var factor = num_of_digits((int) measure) / 3;
-            if (factor >= 1) {
-                var k = decimal_precision == 0 ? 1 : Math.pow(10, (double) decimal_precision);
-                return Value.from_attributes(
-                    ((double) Math.round(measure / Math.pow(10, factor  * 3) * k) / k),
-                    unit,
-                    prefix - factor
-                );
+            var value = measure;
+
+            int distance = 0;
+            while (value >= 1000) {
+                value /= 1000;
+                distance++;
             }
 
-            return this.clone();
+            return to(this.prefix - distance);
         }
 
         public Value to(Prefix prefix) {
             int distance = prefix - this.prefix;
             return Value.from_attributes(
-                this.measure * Math.pow(1000, (double) distance),
+                measure * Math.pow(1000, (double) distance),
                 unit,
                 prefix
             );
@@ -94,15 +92,5 @@ namespace United {
             prefix_unit = prefix.to_string() + unit;
         }
 
-    }
-
-    private int num_of_digits(int value) {
-        var num_digits = 0;
-        while (value != 0) {
-            value /= 10;
-            ++num_digits;
-        }
-
-        return num_digits;
     }
 }

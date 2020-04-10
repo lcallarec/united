@@ -167,7 +167,7 @@ private void register_value_test() {
         var human = object.to_human().to_string();
 
         // Then
-        assert(human == "50.79kg");
+        assert(human == "50.787kg");
     });
 
     Test.add_func("/United/Value/to_human#decimal_precision", () => {
@@ -180,7 +180,7 @@ private void register_value_test() {
         var human = object.to_human(3).to_string(" ");
 
         // Then
-        assert(human == "79.851 ZJ");
+        assert(human == "79.8512 ZJ");
     });
 
     Test.add_func("/United/Value/to", () => {

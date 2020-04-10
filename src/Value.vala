@@ -1,14 +1,14 @@
 namespace United {
 
     public struct Value {
-        double quantity;
+        double measure;
         string unit;
         Prefix prefix;
         string prefix_unit;
 
         public Value(double measure, string measure_unit) {
-            quantity = measure;
-            parse_measure_unit(measure_unit);
+            this.measure = measure;
+            parse(measure, measure_unit);
         }
 
         public Value.from_string(string value) {
@@ -16,25 +16,25 @@ namespace United {
                 Regex regex = new Regex ("^([0-9.,]+)[\\s]{0,}(\\w+)$");
                 MatchInfo info;
                 if (regex.match(value, 0, out info)){
-                    var quantity = info.fetch(1);
+                    var measure = info.fetch(1);
                     var measure_unit = info.fetch(2);
-                    if (quantity != null) {
-                        this.quantity = double.parse(quantity.replace(",", "."));
+                    if (measure != null) {
+                        this.measure = double.parse(measure.replace(",", "."));
                     }
                     if (measure_unit != null) {
-                        parse_measure_unit(measure_unit);
+                        parse(this.measure, measure_unit);
                     }
                 }
             } catch (RegexError e) {
-                quantity = 0;
+                measure = 0;
                 prefix = Prefix.NONE;
                 unit = "";
                 prefix_unit = "";
             }
         }
 
-        public Value.from_attributes(double quantity, string unit, Prefix prefix) {
-            this.quantity = quantity;
+        public Value.from_attributes(double measure, string unit, Prefix prefix) {
+            this.measure = measure;
             this.unit = unit;
             this.prefix = prefix;
             prefix_unit = prefix.to_string() + unit;
@@ -49,15 +49,15 @@ namespace United {
             if (sep != null) {
                 sep = separator;
             }
-            return format.printf(quantity).replace(",", ".") + separator + prefix_unit;
+            return format.printf(measure).replace(",", ".") + separator + prefix_unit;
         }
 
         public Value human(uint8 decimal_precision = 2) {
-            var factor = num_of_digits((int) quantity) / 3;
+            var factor = num_of_digits((int) measure) / 3;
             if (factor >= 1) {
                 var k = decimal_precision == 0 ? 1 : Math.pow(10, (double) decimal_precision);
                 return Value.from_attributes(
-                    ((double) Math.round(quantity / Math.pow(10, factor  * 3) * k) / k),
+                    ((double) Math.round(measure / Math.pow(10, factor  * 3) * k) / k),
                     unit,
                     prefix - factor
                 );
@@ -66,15 +66,24 @@ namespace United {
             return this.clone();
         }
 
-        public Value clone() {
+        public Value to(Prefix prefix) {
+            int distance = prefix - this.prefix;
             return Value.from_attributes(
-                quantity,
+                this.measure * Math.pow(1000, (double) distance),
                 unit,
                 prefix
             );
         }
 
-        private void parse_measure_unit(string measure_unit) {
+        public Value clone() {
+            return Value.from_attributes(
+                measure,
+                unit,
+                prefix
+            );
+        }
+
+        private void parse(double measure, string measure_unit) {
             unit = measure_unit;
             prefix = Prefix.NONE;
             if (measure_unit.length > 1) {
@@ -82,7 +91,7 @@ namespace United {
                 prefix = Prefix.from_string(measure_unit.substring(0, 1));
             }
 
-            prefix_unit = prefix.to_string() + unit; 
+            prefix_unit = prefix.to_string() + unit;
         }
 
     }

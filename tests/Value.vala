@@ -10,7 +10,7 @@ private void register_value_test() {
         var object = United.Value(value, unit);
 
         // Then
-        assert(object.quantity == 12.897);
+        assert(object.measure == 12.897);
         assert(object.to_string() == "12.897g");
         assert(object.prefix == United.Prefix.NONE);
         assert(object.unit == "g");        
@@ -26,7 +26,7 @@ private void register_value_test() {
         var object = United.Value(value, unit);
 
         // Then
-        assert(object.quantity == 77.28);
+        assert(object.measure == 77.28);
         assert(object.unit == "g");      
         assert(object.prefix == United.Prefix.KILO);
         assert(object.to_string() == "77.28kg");
@@ -40,7 +40,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 415);
+        assert(object.measure == 415);
         assert(object.unit == "b");      
         assert(object.prefix == United.Prefix.MEGA);
         assert(object.to_string() == "415Mb");
@@ -54,7 +54,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 415);
+        assert(object.measure == 415);
         assert(object.unit == "b");      
         assert(object.prefix == United.Prefix.MEGA);
         assert(object.to_string() == "415Mb");
@@ -68,7 +68,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 415);
+        assert(object.measure == 415);
         assert(object.unit == "b");      
         assert(object.prefix == United.Prefix.MEGA);
         assert(object.to_string() == "415Mb");
@@ -82,7 +82,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 15.89);
+        assert(object.measure == 15.89);
         assert(object.unit == "l");      
         assert(object.prefix == United.Prefix.MILLI);
         assert(object.to_string() == "15.89ml");
@@ -96,7 +96,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 2.21);
+        assert(object.measure == 2.21);
         assert(object.unit == "W");      
         assert(object.prefix == United.Prefix.GIGA);
         assert(object.to_string() == "2.21GW");
@@ -110,7 +110,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 7.89762);
+        assert(object.measure == 7.89762);
         assert(object.unit == "V");      
         assert(object.prefix == United.Prefix.NANO);
         assert(object.to_string(null, 2) == "7.90nV");
@@ -124,7 +124,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
 
         // Then
-        assert(object.quantity == 12.5);
+        assert(object.measure == 12.5);
         assert(object.unit == "l");      
         assert(object.prefix == United.Prefix.PICO);
         assert(object.to_string(" ") == "12.5 pl");
@@ -181,5 +181,19 @@ private void register_value_test() {
 
         // Then
         assert(human == "79.851 ZJ");
+    });
+
+    Test.add_func("/United/Value/to", () => {
+
+        // Given
+        var value = "897796.7894567mg";
+        var object = United.Value.from_string(value);
+        
+        // When
+        var converted = object.to(United.Prefix.NONE);
+        
+        // Then
+        assert(converted.measure == 897.7967894567);
+        assert(converted.prefix == United.Prefix.NONE);
     });    
 }

@@ -52,7 +52,7 @@ namespace United {
             return format.printf(measure).replace(",", ".") + separator + prefix_unit;
         }
 
-        public Value human(uint8 decimal_precision = 2) {
+        public Value to_human(uint8 decimal_precision = 2) {
             var factor = num_of_digits((int) measure) / 3;
             if (factor >= 1) {
                 var k = decimal_precision == 0 ? 1 : Math.pow(10, (double) decimal_precision);

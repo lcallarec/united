@@ -130,54 +130,54 @@ private void register_value_test() {
         assert(object.to_string(" ") == "12.5 pl");
     });
 
-    Test.add_func("/United/Value/human_big_value", () => {
+    Test.add_func("/United/Value/to_human#big_value", () => {
 
         // Given
         var value = "5050000000ng"; //nanogram
         var object = United.Value.from_string(value);
 
         // When
-        var human = object.human().to_string();
+        var human = object.to_human().to_string();
 
         // Then
         assert(human == "5.05g");
     });
 
 
-    Test.add_func("/United/Value/human_thousands_value", () => {
+    Test.add_func("/United/Value/to_human#thousands_value", () => {
 
         // Given
         var value = "5050g";
         var object = United.Value.from_string(value);
         
         // When
-        var human = object.human().to_string();
+        var human = object.to_human().to_string();
         
         // Then
         assert(human == "5.05kg");
     });
 
-    Test.add_func("/United/Value/human_ten_thousands_value", () => {
+    Test.add_func("/United/Value/to_human#ten_thousands_value", () => {
 
         // Given
         var value = "50787g";
         var object = United.Value.from_string(value);
         
         // When
-        var human = object.human().to_string();
+        var human = object.to_human().to_string();
 
         // Then
         assert(human == "50.79kg");
     });
 
-    Test.add_func("/United/Value/human_decimal_precision", () => {
+    Test.add_func("/United/Value/to_human#decimal_precision", () => {
 
         // Given
         var value = "79851237PJ";
         var object = United.Value.from_string(value);
         
         // When
-        var human = object.human(3).to_string(" ");
+        var human = object.to_human(3).to_string(" ");
 
         // Then
         assert(human == "79.851 ZJ");

@@ -177,7 +177,7 @@ private void register_value_test() {
         var object = United.Value.from_string(value);
         
         // When
-        var human = object.to_human().to_string(" ");
+        var human = object.to_human(3).to_string(" ");
 
         // Then
         assert(human == "79.8512 ZJ");

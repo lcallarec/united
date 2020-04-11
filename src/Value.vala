@@ -52,7 +52,7 @@ namespace United {
             return format.printf(measure).replace(",", ".") + separator + prefix_unit;
         }
 
-        public Value to_human() {
+        public Value to_human(uint8 decimal_precision = 2) {
             var value = measure;
 
             int distance = 0;

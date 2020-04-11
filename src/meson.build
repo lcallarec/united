@@ -1,6 +1,7 @@
 sources = files(
     'Prefix.vala',
-    'Value.vala'
+    'Value.vala',
+    'Bytes.vala',
 )
 
 united_static_lib = static_library('united', [sources], dependencies: deps, vala_args: vala_args)

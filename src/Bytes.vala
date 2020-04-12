@@ -1,9 +1,9 @@
 namespace United {
     
-    public struct Bytes {
-        double value;
-        string unit;
-        Prefix prefix;
+    public class Bytes {
+        public double value;
+        public string unit;
+        public Prefix prefix;
 
         public Bytes(double value, string measure_unit = "B") {
             this.value = value;
@@ -31,13 +31,13 @@ namespace United {
             int distance = prefix - this.prefix;
             // Doesnt't use value * Math.pow(1000, distance) to avoid floating point precision issue
             if (distance > 0) {
-                return Bytes.from_attributes(
+                return new Bytes.from_attributes(
                     value * Math.pow(1000, distance),
                     unit,
                     prefix
                 );
             } else if (distance < 0) {
-                return Bytes.from_attributes(
+                return new Bytes.from_attributes(
                     value / Math.pow(1000, -distance),
                     unit,
                     prefix
@@ -53,7 +53,7 @@ namespace United {
         }
 
         public Bytes clone() {
-            return Bytes.from_attributes(
+            return new Bytes.from_attributes(
                 value,
                 unit,
                 prefix

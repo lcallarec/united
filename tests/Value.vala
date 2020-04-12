@@ -7,7 +7,7 @@ private void register_value_test() {
         var unit = "g";
 
         // When
-        var object = United.Value(value, unit);
+        var object = new United.Value(value, unit);
 
         // Then
         assert(object.measure == 12.897);
@@ -23,7 +23,7 @@ private void register_value_test() {
         var unit = "kg";
 
         // When
-        var object = United.Value(value, unit);
+        var object = new United.Value(value, unit);
 
         // Then
         assert(object.measure == 77.28);
@@ -37,7 +37,7 @@ private void register_value_test() {
         // Given
         var value = "415Mb";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 415);
@@ -51,7 +51,7 @@ private void register_value_test() {
         // Given
         var value = "415 Mb";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 415);
@@ -65,7 +65,7 @@ private void register_value_test() {
         // Given
         var value = "415    Mb";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 415);
@@ -79,7 +79,7 @@ private void register_value_test() {
         // Given
         var value = "15,89ml";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 15.89);
@@ -93,7 +93,7 @@ private void register_value_test() {
         // Given
         var value = "2.21GW";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 2.21);
@@ -107,7 +107,7 @@ private void register_value_test() {
         // Given
         var value = "7.89762nV";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 7.89762);
@@ -121,7 +121,7 @@ private void register_value_test() {
         // Given
         var value = "12.5pl";
         // When
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // Then
         assert(object.measure == 12.5);
@@ -134,7 +134,7 @@ private void register_value_test() {
 
         // Given
         var value = "5050000000ng"; //nanogram
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
 
         // When
         var human = object.to_human().to_string();
@@ -148,7 +148,7 @@ private void register_value_test() {
 
         // Given
         var value = "5050g";
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
         
         // When
         var human = object.to_human().to_string();
@@ -161,7 +161,7 @@ private void register_value_test() {
 
         // Given
         var value = "50787g";
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
         
         // When
         var human = object.to_human().to_string();
@@ -174,7 +174,7 @@ private void register_value_test() {
 
         // Given
         var value = "79851237PJ";
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
         
         // When
         var human = object.to_human(3).to_string(" ");
@@ -187,7 +187,7 @@ private void register_value_test() {
 
         // Given
         var value = "897796.7894567mg";
-        var object = United.Value.from_string(value);
+        var object = new United.Value.from_string(value);
         
         // When
         var converted = object.to(United.Prefix.NONE);

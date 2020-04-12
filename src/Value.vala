@@ -1,10 +1,10 @@
 namespace United {
 
-    public struct Value {
-        double measure;
-        string unit;
-        Prefix prefix;
-        string prefix_unit;
+    public class Value {
+        public double measure;
+        public string unit;
+        public Prefix prefix;
+        public string prefix_unit;
 
         public Value(double measure, string measure_unit) {
             this.measure = measure;
@@ -66,7 +66,7 @@ namespace United {
 
         public Value to(Prefix prefix) {
             int distance = prefix - this.prefix;
-            return Value.from_attributes(
+            return new Value.from_attributes(
                 measure * Math.pow(1000, (double) distance),
                 unit,
                 prefix
@@ -74,7 +74,7 @@ namespace United {
         }
 
         public Value clone() {
-            return Value.from_attributes(
+            return new Value.from_attributes(
                 measure,
                 unit,
                 prefix
@@ -91,6 +91,5 @@ namespace United {
 
             prefix_unit = prefix.to_string() + unit;
         }
-
     }
 }

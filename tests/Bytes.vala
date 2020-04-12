@@ -8,7 +8,7 @@ private void register_bytes_test() {
         var bytes = 1750000;
 
         // When
-        var result = United.Bytes(bytes);
+        var result = new United.Bytes(bytes);
 
         // Then
         assert(result.to_human().to_string() == "1.75MB");
@@ -20,7 +20,7 @@ private void register_bytes_test() {
         var bytes = 5050000000;
 
         // When
-        var result = United.Bytes(bytes);
+        var result = new United.Bytes(bytes);
 
         // Then
         assert(result.to_human().to_string()  == "5.05GB");
@@ -32,7 +32,7 @@ private void register_bytes_test() {
         var bytes = 5800000000;
 
         // When
-        var B = United.Bytes(bytes);
+        var B = new United.Bytes(bytes);
 
         // Then
         var GB = B.to(Prefix.GIGA);

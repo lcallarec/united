@@ -27,7 +27,7 @@ namespace United {
                 }
             } catch (RegexError e) {
                 measure = 0;
-                prefix = Prefix.NONE;
+                prefix = new Prefix(Prefix.NONE);
                 unit = "";
                 prefix_unit = "";
             }
@@ -55,17 +55,17 @@ namespace United {
         public Value to_human(uint8 decimal_precision = 2) {
             var value = measure;
 
-            int distance = 0;
+            int8 distance = 0;
             while (value >= 1000) {
                 value /= 1000;
                 distance++;
             }
 
-            return to(this.prefix - distance);
+            return to(new Prefix(this.prefix.value + distance));
         }
 
         public Value to(Prefix prefix) {
-            int distance = prefix - this.prefix;
+            int distance = prefix.distance_from(this.prefix);
             return new Value.from_attributes(
                 measure * Math.pow(1000, (double) distance),
                 unit,
@@ -83,7 +83,7 @@ namespace United {
 
         private void parse(double measure, string measure_unit) {
             unit = measure_unit;
-            prefix = Prefix.NONE;
+            prefix = new Prefix(Prefix.NONE);
             if (measure_unit.length > 1) {
                 unit = measure_unit.substring(measure_unit.length - 1, 1);
                 prefix = Prefix.from_string(measure_unit.substring(0, 1));

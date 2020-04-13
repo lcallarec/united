@@ -1,76 +1,86 @@
 namespace United {
 
-    public enum Prefix {
-        YOTTA,
-        ZETA,
-        EXA,
-        PETA,
-        TERA,
-        GIGA,
-        MEGA,
-        KILO,
-        NONE,
-        MILLI,
-        MICRO,
-        NANO,
-        PICO,
-        FEMTO,
-        ATTO,
-        ZEPTO,
-        YOCTO;
+    public class Prefix {
 
+        public const int8 YOTTA  = 8;
+        public const int8 ZETA   = 7;
+        public const int8 EXA    = 6;
+        public const int8 PETA   = 5;
+        public const int8 TERA   = 4;
+        public const int8 GIGA   = 3;
+        public const int8 MEGA   = 2;
+        public const int8 KILO   = 1; 
+        public const int8 NONE   = 0;
+        public const int8 MILLI  = -1;
+        public const int8 MICRO  = -2;
+        public const int8 NANO   = -3;
+        public const int8 PICO   = -4;
+        public const int8 FEMTO  = -5;
+        public const int8 ATTO   = -6;
+        public const int8 ZEPTO  = -7;
+        public const int8 YOCTO  = -8;
+
+        public int8 value;
+
+        public Prefix(int8 value = Prefix.NONE) {
+            this.value = value;
+        }
+
+        public int8 distance_from(Prefix prefix) {
+            return prefix.value - this.value;
+        }
         public string to_string() {
             var result = "";
-            switch (this) {
-                case YOTTA:
+            switch (this.value) {
+                case Prefix.YOTTA:
                     result = "Y";
                     break;
-                case ZETA:
+                case Prefix.ZETA:
                     result = "Z";
                     break;
-                case EXA:
+                case Prefix.EXA:
                     result = "E";
                     break;
-                case PETA:
+                case Prefix.PETA:
                     result = "P";
                     break;
-                case TERA:
+                case Prefix.TERA:
                     result = "T";
                     break;
-                case GIGA:
+                case Prefix.GIGA:
                     result = "G";
                     break;
-                case MEGA:
+                case Prefix.MEGA:
                     result = "M";
                     break;
-                case KILO:
+                case Prefix.KILO:
                     result = "k";
                     break;
-                case NONE:
+                case Prefix.NONE:
                     result = "";
                     break;
-                case MILLI:
+                case Prefix.MILLI:
                     result = "m";
                     break;
-                case MICRO:
+                case Prefix.MICRO:
                     result = "μ";
                     break;
-                case NANO:
+                case Prefix.NANO:
                     result = "n";
                     break;
-                case PICO:
+                case Prefix.PICO:
                     result = "p";
                     break;
-                case FEMTO:
+                case Prefix.FEMTO:
                     result = "f";
                     break;
-                case ATTO:
+                case Prefix.ATTO:
                     result = "a";
                     break;
-                case ZEPTO:
+                case Prefix.ZEPTO:
                     result = "z";
                     break;
-                case YOCTO:
+                case Prefix.YOCTO:
                     result = "y";
                     break;
             }
@@ -78,64 +88,197 @@ namespace United {
             return result;
         }
        
-       
+        public bool equals(int8 value) {
+            return this.value == value;
+        }
+
         public static Prefix from_string(string prefix) {
-            var result = Prefix.NONE;
+            var result = new Prefix(Prefix.NONE);
             switch (prefix) {
                 case "Y":
-                    result = Prefix.YOTTA;
+                    result = new Prefix(Prefix.YOTTA);
                     break;
                 case "Z":
-                    result = Prefix.ZETA;
+                    result = new Prefix(Prefix.ZETA);
                     break;
                 case "E":
-                    result = Prefix.EXA;
+                    result = new Prefix(Prefix.EXA);
                     break;
                 case "P":
-                    result = Prefix.PETA;
+                    result = new Prefix(Prefix.PETA);
                     break;
                 case "T":
-                    result = Prefix.TERA;
+                    result = new Prefix(Prefix.TERA);
                     break;
                 case "G":
-                    result = Prefix.GIGA;
+                    result = new Prefix(Prefix.GIGA);
                     break;
                 case "M":
-                    result = Prefix.MEGA;
+                    result = new Prefix(Prefix.MEGA);
                     break;
                 case "k":
-                    result = Prefix.KILO;
+                    result = new Prefix(Prefix.KILO);
                     break;
                 case "":
-                    result = Prefix.NONE;
+                    result = new Prefix(Prefix.NONE);
                     break;
                 case "m":
-                    result = Prefix.MILLI;
+                    result = new Prefix(Prefix.MILLI);
                     break;
                 case "μ":
-                    result = Prefix.MICRO;
+                    result = new Prefix(Prefix.MICRO);
                     break;
                 case "n":
-                    result = Prefix.NANO;
+                    result = new Prefix(Prefix.NANO);
                     break;
                 case "p":
-                    result = Prefix.PICO;
+                    result = new Prefix(Prefix.PICO);
                     break;
                 case "f":
-                    result = Prefix.FEMTO;
+                    result = new Prefix(Prefix.FEMTO);
                     break;
                 case "a":
-                    result = Prefix.ATTO;
+                    result = new Prefix(Prefix.ATTO);
                     break;
                 case "z":
-                    result = Prefix.ZEPTO;
+                    result = new Prefix(Prefix.ZEPTO);
                     break;
                 case "y":
-                    result = Prefix.YOCTO;
+                    result = new Prefix(Prefix.YOCTO);
                     break;
             }
 
             return result;
         }
     }
+
+    //  public enum BinaryPrefix {
+    //      YOTTA,
+    //      ZETA,
+    //      EXA,
+    //      PETA,
+    //      TERA,
+    //      GIGA,
+    //      MEGA,
+    //      KILO;
+
+    //      public string to_string() {
+    //          var result = "";
+    //          switch (this) {
+    //              case YOTTA:
+    //                  result = "Yi";
+    //                  break;
+    //              case ZETA:
+    //                  result = "Zi";
+    //                  break;
+    //              case EXA:
+    //                  result = "Ei";
+    //                  break;
+    //              case PETA:
+    //                  result = "Pi";
+    //                  break;
+    //              case TERA:
+    //                  result = "Ti";
+    //                  break;
+    //              case GIGA:
+    //                  result = "Gi";
+    //                  break;
+    //              case MEGA:
+    //                  result = "Mi";
+    //                  break;
+    //              case KILO:
+    //                  result = "ki";
+    //                  break;
+    //              case NONE:
+    //                  result = "i";
+    //                  break;
+    //              case MILLI:
+    //                  result = "mi";
+    //                  break;
+    //              case MICRO:
+    //                  result = "μi";
+    //                  break;
+    //              case NANO:
+    //                  result = "ni";
+    //                  break;
+    //              case PICO:
+    //                  result = "pi";
+    //                  break;
+    //              case FEMTO:
+    //                  result = "fi";
+    //                  break;
+    //              case ATTO:
+    //                  result = "ai";
+    //                  break;
+    //              case ZEPTO:
+    //                  result = "zi";
+    //                  break;
+    //              case YOCTO:
+    //                  result = "yi";
+    //                  break;
+    //          }
+
+    //          return result;
+    //      }
+       
+       
+    //      public static BinaryPrefix from_string(string prefix) {
+    //          var result = Prefix.NONE;
+    //          switch (prefix) {
+    //              case "Yi":
+    //                  result = Prefix.YOTTA;
+    //                  break;
+    //              case "Zi":
+    //                  result = Prefix.ZETA;
+    //                  break;
+    //              case "Ei":
+    //                  result = Prefix.EXA;
+    //                  break;
+    //              case "Pi":
+    //                  result = Prefix.PETA;
+    //                  break;
+    //              case "Ti":
+    //                  result = Prefix.TERA;
+    //                  break;
+    //              case "Gi":
+    //                  result = Prefix.GIGA;
+    //                  break;
+    //              case "Mi":
+    //                  result = Prefix.MEGA;
+    //                  break;
+    //              case "ki":
+    //                  result = Prefix.KILO;
+    //                  break;
+    //              case "i":
+    //                  result = Prefix.NONE;
+    //                  break;
+    //              case "mi":
+    //                  result = Prefix.MILLI;
+    //                  break;
+    //              case "μi":
+    //                  result = Prefix.MICRO;
+    //                  break;
+    //              case "ni":
+    //                  result = Prefix.NANO;
+    //                  break;
+    //              case "pi":
+    //                  result = Prefix.PICO;
+    //                  break;
+    //              case "fi":
+    //                  result = Prefix.FEMTO;
+    //                  break;
+    //              case "ai":
+    //                  result = Prefix.ATTO;
+    //                  break;
+    //              case "zi":
+    //                  result = Prefix.ZEPTO;
+    //                  break;
+    //              case "yi":
+    //                  result = Prefix.YOCTO;
+    //                  break;
+    //          }
+
+    //          return result;
+    //      }
+    //  }
 }

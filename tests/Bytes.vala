@@ -35,26 +35,26 @@ private void register_bytes_test() {
         var B = new United.Bytes(bytes);
 
         // Then
-        var GB = B.to(Prefix.GIGA);
+        var GB = B.to(new Prefix(Prefix.GIGA));
 
 
         // When
-        var B2 = GB.to(Prefix.NONE);
+        var B2 = GB.to(new Prefix(Prefix.NONE));
         
         // Then
         assert(B2.value == bytes);
         assert(B2.unit == "B");
-        assert(B2.prefix == Prefix.NONE);
+        assert(B2.prefix.equals(Prefix.NONE));
         
         // When
-        var MB = B.to(Prefix.MEGA);
+        var MB = B.to(new Prefix(Prefix.MEGA));
         
         // Then
         assert(MB.value == 5800);
         assert(MB.to_string() == "5800MB");
 
         // When
-        var KB = MB.to(Prefix.KILO);
+        var KB = MB.to(new Prefix(Prefix.KILO));
         
         // Then
         assert(KB.value == 5800000);
@@ -62,10 +62,22 @@ private void register_bytes_test() {
 
 
         // When
-        var GB2 = KB.to(Prefix.GIGA);
+        var GB2 = KB.to(new Prefix(Prefix.GIGA));
         
         // Then
         assert(GB2.value == 5.8);
         assert(GB2.to_string() == "5.8GB");
-      });
+    });
+
+    //  Test.add_func("/United/Bytes#B->MiB", () => {
+
+    //      // Given
+    //      var bytes = 1750000;
+
+    //      // When
+    //      var result = new United.Bytes(bytes);
+
+    //      // Then
+    //      assert(result.binary().to(new Prefix(Prefix.MEGA).to_string() == "1,668930054MiB"));
+    //  });
 }

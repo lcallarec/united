@@ -6,7 +6,11 @@ libm = cc.find_library('m', required: true)
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
 
-vala_args = ['--target-glib=2.50']
+vala_args = []
+
+if get_option('debug') == true
+  vala_args += ['--ccode', '--debug']
+endif
 
 deps = [
   glib,

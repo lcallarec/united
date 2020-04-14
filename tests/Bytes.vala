@@ -101,8 +101,22 @@ private void register_binary_bytes_test() {
         // Then
         assert(KiB.to_string("%0.6f") == "1708.984375KiB");
         assert(MiB.to_string() == "1.66893MiB");
+    });   
+    
+    Test.add_func("/United/Bytes#B -> KiB -> MiB (bis)", () => {
 
-    });    
+        // Given
+        var bytes = 2 * 1024 * 1024; //2097152
+
+        // When
+        var B = new United.Bytes(bytes);
+        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
+        var MiB = KiB.to(new IECPrefix(IECPrefix.MEBI));
+        
+        // Then
+        assert(KiB.to_string() == "2048KiB");
+        assert(MiB.to_string() == "2MiB");
+    });
 
     //Bytes to Binary to smaller Binary
     Test.add_func("/United/Bytes#B -> MiB -> KiB", () => {
@@ -153,22 +167,7 @@ private void register_binary_bytes_test() {
         assert(kB.to_string() == "2097.15kB");
     });
 
-    Test.add_func("/United/Bytes#B -> KiB -> MiB????", () => {
-
-        // Given
-        var bytes = 2 * 1024 * 1024; //2097152
-
-        // When
-        var B = new United.Bytes(bytes);
-        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
-        var MiB = KiB.to(new IECPrefix(IECPrefix.MEBI));
-        
-        // Then
-        assert(KiB.to_string() == "2048KiB");
-        assert(MiB.to_string() == "2MiB");
-    });
-
-    Test.add_func("/United/Bytes#B -> KiB -> kB ggg", () => {
+    Test.add_func("/United/Bytes#B -> KiB -> kB", () => {
 
         // Given
         var bytes = 2 * 1024 * 1024; //2097152
@@ -183,7 +182,7 @@ private void register_binary_bytes_test() {
     });
 
 
-    Test.add_func("/United/Bytes#B -> kB -> KiB hhh", () => {
+    Test.add_func("/United/Bytes#B -> kB -> KiB", () => {
 
         // Given
         var bytes = 1000;
@@ -197,7 +196,7 @@ private void register_binary_bytes_test() {
         assert(KiB.to_string() == "0.976562KiB");
     });
 
-    Test.add_func("/United/Bytes#B -> kB -> KiB hhhhhhh", () => {
+    Test.add_func("/United/Bytes#B -> GB", () => {
 
         // Given
         var bytes = 2097152;
@@ -210,7 +209,7 @@ private void register_binary_bytes_test() {
         assert(GB.to_string("%.9f") == "0.002097152GB");
     });
 
-    Test.add_func("/United/Bytes#B -> kB -> KiB hhhhhhffdfdhhh", () => {
+    Test.add_func("/United/Bytes#B -> MiB -> B", () => {
 
         // Given
         var bytes = 2 * 1024 * 1024; //2097152

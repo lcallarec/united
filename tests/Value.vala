@@ -190,7 +190,7 @@ private void register_value_test() {
         var object = new United.Value.from_string(value);
         
         // When
-        var converted = object.to(new United.Prefix(United.Prefix.NONE));
+        var converted = object.to(United.Prefix.none());
         
         // Then
         assert(converted.measure == 897.7967894567);

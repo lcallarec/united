@@ -86,6 +86,42 @@ namespace United {
         public Prefixable create_at(int8 distance) {
             return new IECPrefix(this.get_value() + distance);
         }
+
+        public static IECPrefix yobi() {
+            return new IECPrefix(IECPrefix.YOBI);
+        }
+
+        public static IECPrefix zebi() {
+            return new IECPrefix(IECPrefix.ZEBI);
+        }
+
+        public static IECPrefix exbi() {
+            return new IECPrefix(IECPrefix.EXBI);
+        }
+
+        public static IECPrefix pebi() {
+            return new IECPrefix(IECPrefix.PEBI);
+        }
+
+        public static IECPrefix tebi() {
+            return new IECPrefix(IECPrefix.TEBI);
+        }
+
+        public static IECPrefix gibi() {
+            return new IECPrefix(IECPrefix.GIBI);
+        }
+
+        public static IECPrefix mebi() {
+            return new IECPrefix(IECPrefix.MEBI);
+        }
+
+        public static IECPrefix kibi() {
+            return new IECPrefix(IECPrefix.KIBI);
+        }
+
+        public static IECPrefix none() {
+            return new IECPrefix(IECPrefix.NONE);
+        }
     }
 
     public class Prefix : Prefixable, Object {
@@ -250,6 +286,74 @@ namespace United {
             }
 
             return result;
+        }
+
+        public static Prefix yotta() {
+            return new Prefix(Prefix.YOTTA);
+        }
+
+        public static Prefix zeta() {
+            return new Prefix(Prefix.ZETA);
+        }
+
+        public static Prefix exa() {
+            return new Prefix(Prefix.EXA);
+        }
+
+        public static Prefix peta() {
+            return new Prefix(Prefix.PETA);
+        }
+
+        public static Prefix tera() {
+            return new Prefix(Prefix.TERA);
+        }
+
+        public static Prefix giga() {
+            return new Prefix(Prefix.GIGA);
+        }
+
+        public static Prefix mega() {
+            return new Prefix(Prefix.MEGA);
+        }
+
+        public static Prefix kilo() {
+            return new Prefix(Prefix.KILO);
+        }
+
+        public static Prefix none() {
+            return new Prefix(Prefix.NONE);
+        }
+
+        public static Prefix milli() {
+            return new Prefix(Prefix.MILLI);
+        }
+
+        public static Prefix micro() {
+            return new Prefix(Prefix.MICRO);
+        }
+
+        public static Prefix nano() {
+            return new Prefix(Prefix.NANO);
+        }
+
+        public static Prefix pico() {
+            return new Prefix(Prefix.PICO);
+        }
+
+        public static Prefix femto() {
+            return new Prefix(Prefix.FEMTO);
+        }
+
+        public static Prefix atto() {
+            return new Prefix(Prefix.ATTO);
+        }
+
+        public static Prefix zepto() {
+            return new Prefix(Prefix.ZEPTO);
+        }
+
+        public static Prefix yocto() {
+            return new Prefix(Prefix.YOCTO);
         }
     }
 }

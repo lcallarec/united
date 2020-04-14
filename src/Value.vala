@@ -3,7 +3,7 @@ namespace United {
     public class Value {
         public double measure;
         public string unit;
-        public Prefix prefix;
+        public Prefixable prefix;
         public string prefix_unit;
 
         public Value(double measure, string measure_unit) {
@@ -33,7 +33,7 @@ namespace United {
             }
         }
 
-        public Value.from_attributes(double measure, string unit, Prefix prefix) {
+        public Value.from_attributes(double measure, string unit, Prefixable prefix) {
             this.measure = measure;
             this.unit = unit;
             this.prefix = prefix;
@@ -61,13 +61,13 @@ namespace United {
                 distance++;
             }
 
-            return to(new Prefix(this.prefix.value + distance));
+            return to(new Prefix(this.prefix.get_value() + distance));
         }
 
-        public Value to(Prefix prefix) {
+        public Value to(Prefixable prefix) {
             int distance = prefix.distance_from(this.prefix);
             return new Value.from_attributes(
-                measure * Math.pow(1000, (double) distance),
+                measure * Math.pow(1000, -distance),
                 unit,
                 prefix
             );
@@ -86,7 +86,7 @@ namespace United {
             prefix = new Prefix(Prefix.NONE);
             if (measure_unit.length > 1) {
                 unit = measure_unit.substring(measure_unit.length - 1, 1);
-                prefix = Prefix.from_string(measure_unit.substring(0, 1));
+                prefix = prefix.from_string(measure_unit.substring(0, 1));
             }
 
             prefix_unit = prefix.to_string() + unit;

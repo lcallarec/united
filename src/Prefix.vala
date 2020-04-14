@@ -1,6 +1,94 @@
 namespace United {
 
-    public class Prefix {
+    public interface Prefixable : Object {
+        public abstract double get_factor();
+        public abstract string to_string();
+        public abstract int8 distance_from(Prefixable prefix);
+        public abstract bool equals(int8 value);
+        public abstract Prefixable from_string(string prefix);
+        public abstract int8 get_value();
+        public abstract Prefixable create_at(int8 distance);
+    }
+
+    public class BiPrefix : Prefixable, Object {
+        public const int8 YOBI = 8;
+        public const int8 ZEBI = 7;
+        public const int8 EXBI = 6;
+        public const int8 PEBI = 5;
+        public const int8 TEBI = 4;
+        public const int8 GIBI = 3;
+        public const int8 MEBI = 2;
+        public const int8 KIBI = 1;
+
+        public const int8 NONE = 0;
+
+        public int8 value;
+
+        public BiPrefix(int8 value = BiPrefix.NONE) {
+            this.value = value;
+        }
+        public double get_factor() {
+            return 1024;
+        }
+
+        public string to_string() {
+            var result = "";
+            switch (this.value) {
+                case BiPrefix.YOBI:
+                    result = "Yi";
+                    break;
+                case BiPrefix.ZEBI:
+                    result = "Zi";
+                    break;
+                case BiPrefix.EXBI:
+                    result = "Ei";
+                    break;
+                case BiPrefix.PEBI:
+                    result = "Pi";
+                    break;
+                case BiPrefix.TEBI:
+                    result = "Ti";
+                    break;
+                case BiPrefix.GIBI:
+                    result = "Gi";
+                    break;
+                case BiPrefix.MEBI:
+                    result = "Mi";
+                    break;
+                case BiPrefix.KIBI:
+                    result = "Ki";
+                    break;
+                case BiPrefix.NONE:
+                    result = "";
+                    break;
+            }
+
+            return result;
+        }
+
+        public int8 get_value() {
+            return this.value;
+        }
+
+
+        public int8 distance_from(Prefixable prefix) {
+            return this.value - prefix.get_value();
+        }
+
+        public bool equals(int8 value) {
+            return this.value == value;
+        }
+
+        public Prefixable from_string(string prefix) {
+            return new BiPrefix(this.value);
+        }
+
+        public Prefixable create_at(int8 distance) {
+            return new BiPrefix(this.get_value() + distance);
+        }
+    }
+
+    public class Prefix : Prefixable, Object {
 
         public const int8 YOTTA  = 8;
         public const int8 ZETA   = 7;
@@ -25,10 +113,23 @@ namespace United {
         public Prefix(int8 value = Prefix.NONE) {
             this.value = value;
         }
-
-        public int8 distance_from(Prefix prefix) {
-            return prefix.value - this.value;
+        public double get_factor() {
+            return 1000;
         }
+
+        public int8 distance_from(Prefixable prefix) {
+            return this.value - prefix.get_value();
+        }
+
+        public int8 get_value() {
+            return this.value;
+        }
+
+
+        public Prefixable create_at(int8 distance) {
+            return new Prefix(this.get_value() + distance);
+        }
+
         public string to_string() {
             var result = "";
             switch (this.value) {
@@ -92,7 +193,7 @@ namespace United {
             return this.value == value;
         }
 
-        public static Prefix from_string(string prefix) {
+        public Prefixable from_string(string prefix) {
             var result = new Prefix(Prefix.NONE);
             switch (prefix) {
                 case "Y":
@@ -151,134 +252,4 @@ namespace United {
             return result;
         }
     }
-
-    //  public enum BinaryPrefix {
-    //      YOTTA,
-    //      ZETA,
-    //      EXA,
-    //      PETA,
-    //      TERA,
-    //      GIGA,
-    //      MEGA,
-    //      KILO;
-
-    //      public string to_string() {
-    //          var result = "";
-    //          switch (this) {
-    //              case YOTTA:
-    //                  result = "Yi";
-    //                  break;
-    //              case ZETA:
-    //                  result = "Zi";
-    //                  break;
-    //              case EXA:
-    //                  result = "Ei";
-    //                  break;
-    //              case PETA:
-    //                  result = "Pi";
-    //                  break;
-    //              case TERA:
-    //                  result = "Ti";
-    //                  break;
-    //              case GIGA:
-    //                  result = "Gi";
-    //                  break;
-    //              case MEGA:
-    //                  result = "Mi";
-    //                  break;
-    //              case KILO:
-    //                  result = "ki";
-    //                  break;
-    //              case NONE:
-    //                  result = "i";
-    //                  break;
-    //              case MILLI:
-    //                  result = "mi";
-    //                  break;
-    //              case MICRO:
-    //                  result = "μi";
-    //                  break;
-    //              case NANO:
-    //                  result = "ni";
-    //                  break;
-    //              case PICO:
-    //                  result = "pi";
-    //                  break;
-    //              case FEMTO:
-    //                  result = "fi";
-    //                  break;
-    //              case ATTO:
-    //                  result = "ai";
-    //                  break;
-    //              case ZEPTO:
-    //                  result = "zi";
-    //                  break;
-    //              case YOCTO:
-    //                  result = "yi";
-    //                  break;
-    //          }
-
-    //          return result;
-    //      }
-       
-       
-    //      public static BinaryPrefix from_string(string prefix) {
-    //          var result = Prefix.NONE;
-    //          switch (prefix) {
-    //              case "Yi":
-    //                  result = Prefix.YOTTA;
-    //                  break;
-    //              case "Zi":
-    //                  result = Prefix.ZETA;
-    //                  break;
-    //              case "Ei":
-    //                  result = Prefix.EXA;
-    //                  break;
-    //              case "Pi":
-    //                  result = Prefix.PETA;
-    //                  break;
-    //              case "Ti":
-    //                  result = Prefix.TERA;
-    //                  break;
-    //              case "Gi":
-    //                  result = Prefix.GIGA;
-    //                  break;
-    //              case "Mi":
-    //                  result = Prefix.MEGA;
-    //                  break;
-    //              case "ki":
-    //                  result = Prefix.KILO;
-    //                  break;
-    //              case "i":
-    //                  result = Prefix.NONE;
-    //                  break;
-    //              case "mi":
-    //                  result = Prefix.MILLI;
-    //                  break;
-    //              case "μi":
-    //                  result = Prefix.MICRO;
-    //                  break;
-    //              case "ni":
-    //                  result = Prefix.NANO;
-    //                  break;
-    //              case "pi":
-    //                  result = Prefix.PICO;
-    //                  break;
-    //              case "fi":
-    //                  result = Prefix.FEMTO;
-    //                  break;
-    //              case "ai":
-    //                  result = Prefix.ATTO;
-    //                  break;
-    //              case "zi":
-    //                  result = Prefix.ZEPTO;
-    //                  break;
-    //              case "yi":
-    //                  result = Prefix.YOCTO;
-    //                  break;
-    //          }
-
-    //          return result;
-    //      }
-    //  }
 }

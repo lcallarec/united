@@ -5,6 +5,7 @@ void main (string[] args) {
     register_value_test();
     register_prefix_test();
     register_bytes_test();
+    register_binary_bytes_test();
 
     Test.run();
 }

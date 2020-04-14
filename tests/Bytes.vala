@@ -81,7 +81,7 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var MiB = B.to(new BiPrefix(BiPrefix.MEBI));
+        var MiB = B.to(new IECPrefix(IECPrefix.MEBI));
 
         // Then
         assert(MiB.to_string() == "1.66893MiB");
@@ -95,8 +95,8 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var KiB = B.to(new BiPrefix(BiPrefix.KIBI));
-        var MiB = KiB.to(new BiPrefix(BiPrefix.MEBI));
+        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
+        var MiB = KiB.to(new IECPrefix(IECPrefix.MEBI));
 
         // Then
         assert(KiB.to_string("%0.6f") == "1708.984375KiB");
@@ -112,8 +112,8 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var MiB = B.to(new BiPrefix(BiPrefix.MEBI));
-        var KiB = MiB.to(new BiPrefix(BiPrefix.KIBI));
+        var MiB = B.to(new IECPrefix(IECPrefix.MEBI));
+        var KiB = MiB.to(new IECPrefix(IECPrefix.KIBI));
 
         // Then
 
@@ -130,7 +130,7 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var KiB = B.to(new BiPrefix(BiPrefix.KIBI));
+        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
         var MB = KiB.to(new Prefix(Prefix.MEGA));
 
         // Then
@@ -145,7 +145,7 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var MiB = B.to(new BiPrefix(BiPrefix.MEBI));
+        var MiB = B.to(new IECPrefix(IECPrefix.MEBI));
         var kB = MiB.to(new Prefix(Prefix.KILO));
 
         // Then
@@ -160,8 +160,8 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var KiB = B.to(new BiPrefix(BiPrefix.KIBI));
-        var MiB = KiB.to(new BiPrefix(BiPrefix.MEBI));
+        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
+        var MiB = KiB.to(new IECPrefix(IECPrefix.MEBI));
         
         // Then
         assert(KiB.to_string() == "2048KiB");
@@ -175,7 +175,7 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var KiB = B.to(new BiPrefix(BiPrefix.KIBI));
+        var KiB = B.to(new IECPrefix(IECPrefix.KIBI));
         var kB = KiB.to(new Prefix(Prefix.KILO));
         
         // Then
@@ -191,7 +191,7 @@ private void register_binary_bytes_test() {
         // When
         var B = new United.Bytes(bytes);
         var kB = B.to(new Prefix(Prefix.KILO));
-        var KiB = kB.to(new BiPrefix(BiPrefix.KIBI));
+        var KiB = kB.to(new IECPrefix(IECPrefix.KIBI));
         
         // Then
         assert(KiB.to_string() == "0.976562KiB");
@@ -217,8 +217,8 @@ private void register_binary_bytes_test() {
 
         // When
         var B = new United.Bytes(bytes);
-        var MiB = B.to(new BiPrefix(BiPrefix.MEBI));
-        var B2 = MiB.to(new BiPrefix(BiPrefix.NONE));
+        var MiB = B.to(new IECPrefix(IECPrefix.MEBI));
+        var B2 = MiB.to(new IECPrefix(IECPrefix.NONE));
         
         // Then
         assert(MiB.to_string() == "2MiB");

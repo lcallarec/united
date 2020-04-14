@@ -10,7 +10,7 @@ namespace United {
         public abstract Prefixable create_at(int8 distance);
     }
 
-    public class BiPrefix : Prefixable, Object {
+    public class IECPrefix : Prefixable, Object {
         public const int8 YOBI = 8;
         public const int8 ZEBI = 7;
         public const int8 EXBI = 6;
@@ -19,14 +19,14 @@ namespace United {
         public const int8 GIBI = 3;
         public const int8 MEBI = 2;
         public const int8 KIBI = 1;
-
         public const int8 NONE = 0;
 
         public int8 value;
 
-        public BiPrefix(int8 value = BiPrefix.NONE) {
+        public IECPrefix(int8 value = IECPrefix.NONE) {
             this.value = value;
         }
+
         public double get_factor() {
             return 1024;
         }
@@ -34,31 +34,31 @@ namespace United {
         public string to_string() {
             var result = "";
             switch (this.value) {
-                case BiPrefix.YOBI:
+                case IECPrefix.YOBI:
                     result = "Yi";
                     break;
-                case BiPrefix.ZEBI:
+                case IECPrefix.ZEBI:
                     result = "Zi";
                     break;
-                case BiPrefix.EXBI:
+                case IECPrefix.EXBI:
                     result = "Ei";
                     break;
-                case BiPrefix.PEBI:
+                case IECPrefix.PEBI:
                     result = "Pi";
                     break;
-                case BiPrefix.TEBI:
+                case IECPrefix.TEBI:
                     result = "Ti";
                     break;
-                case BiPrefix.GIBI:
+                case IECPrefix.GIBI:
                     result = "Gi";
                     break;
-                case BiPrefix.MEBI:
+                case IECPrefix.MEBI:
                     result = "Mi";
                     break;
-                case BiPrefix.KIBI:
+                case IECPrefix.KIBI:
                     result = "Ki";
                     break;
-                case BiPrefix.NONE:
+                case IECPrefix.NONE:
                     result = "";
                     break;
             }
@@ -80,11 +80,11 @@ namespace United {
         }
 
         public Prefixable from_string(string prefix) {
-            return new BiPrefix(this.value);
+            return new IECPrefix(this.value);
         }
 
         public Prefixable create_at(int8 distance) {
-            return new BiPrefix(this.get_value() + distance);
+            return new IECPrefix(this.get_value() + distance);
         }
     }
 

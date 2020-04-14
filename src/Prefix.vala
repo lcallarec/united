@@ -10,7 +10,7 @@ namespace United {
         public abstract Prefixable create_at(int8 distance);
     }
 
-    public class IECPrefix : Prefixable, Object {
+    public class BinaryPrefix : Prefixable, Object {
         public const int8 YOBI = 8;
         public const int8 ZEBI = 7;
         public const int8 EXBI = 6;
@@ -23,7 +23,7 @@ namespace United {
 
         public int8 value;
 
-        public IECPrefix(int8 value = IECPrefix.NONE) {
+        public BinaryPrefix(int8 value = BinaryPrefix.NONE) {
             this.value = value;
         }
 
@@ -34,31 +34,31 @@ namespace United {
         public string to_string() {
             var result = "";
             switch (this.value) {
-                case IECPrefix.YOBI:
+                case BinaryPrefix.YOBI:
                     result = "Yi";
                     break;
-                case IECPrefix.ZEBI:
+                case BinaryPrefix.ZEBI:
                     result = "Zi";
                     break;
-                case IECPrefix.EXBI:
+                case BinaryPrefix.EXBI:
                     result = "Ei";
                     break;
-                case IECPrefix.PEBI:
+                case BinaryPrefix.PEBI:
                     result = "Pi";
                     break;
-                case IECPrefix.TEBI:
+                case BinaryPrefix.TEBI:
                     result = "Ti";
                     break;
-                case IECPrefix.GIBI:
+                case BinaryPrefix.GIBI:
                     result = "Gi";
                     break;
-                case IECPrefix.MEBI:
+                case BinaryPrefix.MEBI:
                     result = "Mi";
                     break;
-                case IECPrefix.KIBI:
+                case BinaryPrefix.KIBI:
                     result = "Ki";
                     break;
-                case IECPrefix.NONE:
+                case BinaryPrefix.NONE:
                     result = "";
                     break;
             }
@@ -80,47 +80,47 @@ namespace United {
         }
 
         public Prefixable from_string(string prefix) {
-            return new IECPrefix(this.value);
+            return new BinaryPrefix(this.value);
         }
 
         public Prefixable create_at(int8 distance) {
-            return new IECPrefix(this.get_value() + distance);
+            return new BinaryPrefix(this.get_value() + distance);
         }
 
-        public static IECPrefix yobi() {
-            return new IECPrefix(IECPrefix.YOBI);
+        public static BinaryPrefix yobi() {
+            return new BinaryPrefix(BinaryPrefix.YOBI);
         }
 
-        public static IECPrefix zebi() {
-            return new IECPrefix(IECPrefix.ZEBI);
+        public static BinaryPrefix zebi() {
+            return new BinaryPrefix(BinaryPrefix.ZEBI);
         }
 
-        public static IECPrefix exbi() {
-            return new IECPrefix(IECPrefix.EXBI);
+        public static BinaryPrefix exbi() {
+            return new BinaryPrefix(BinaryPrefix.EXBI);
         }
 
-        public static IECPrefix pebi() {
-            return new IECPrefix(IECPrefix.PEBI);
+        public static BinaryPrefix pebi() {
+            return new BinaryPrefix(BinaryPrefix.PEBI);
         }
 
-        public static IECPrefix tebi() {
-            return new IECPrefix(IECPrefix.TEBI);
+        public static BinaryPrefix tebi() {
+            return new BinaryPrefix(BinaryPrefix.TEBI);
         }
 
-        public static IECPrefix gibi() {
-            return new IECPrefix(IECPrefix.GIBI);
+        public static BinaryPrefix gibi() {
+            return new BinaryPrefix(BinaryPrefix.GIBI);
         }
 
-        public static IECPrefix mebi() {
-            return new IECPrefix(IECPrefix.MEBI);
+        public static BinaryPrefix mebi() {
+            return new BinaryPrefix(BinaryPrefix.MEBI);
         }
 
-        public static IECPrefix kibi() {
-            return new IECPrefix(IECPrefix.KIBI);
+        public static BinaryPrefix kibi() {
+            return new BinaryPrefix(BinaryPrefix.KIBI);
         }
 
-        public static IECPrefix none() {
-            return new IECPrefix(IECPrefix.NONE);
+        public static BinaryPrefix none() {
+            return new BinaryPrefix(BinaryPrefix.NONE);
         }
     }
 

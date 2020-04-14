@@ -1,4 +1,4 @@
-project('united', ['vala', 'c'], version: '0.1')
+project('united', ['vala', 'c'], version: '0.7')
 
 cc = meson.get_compiler('c')
 libm = cc.find_library('m', required: true)

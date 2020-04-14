@@ -161,7 +161,6 @@ namespace United {
             return this.value;
         }
 
-
         public Prefixable create_at(int8 distance) {
             return new Prefix(this.get_value() + distance);
         }

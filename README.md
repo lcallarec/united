@@ -148,7 +148,7 @@ Bytes share most of the `Value` features.
 ```vala
 // From value and unit (potentially prefixed)
 var size = new Bytes(5, "B");
-var size = new Value(5.97, "MB");
+var size = new Bytes(5.97, "MB");
 
 ```
 
